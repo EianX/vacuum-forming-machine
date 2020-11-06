@@ -1,0 +1,13 @@
+component,quantity
+arduino mega,1
+LCD display 4*20,1
+IR sensor,4
+95DB electronic buzzer,1
+relay 5pin,2
+fan 9*9,4
+Thermocouple Temperature Sensor K Type,1
+selector(on/off),1
+AC lamp,4
+heater quartz,4
+solid state relay,1
+
