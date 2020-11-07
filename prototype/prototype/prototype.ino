@@ -16,7 +16,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 int matrial = 0; //Acrylic-PVC:0, PP:1
 int thick = 0;
 float temp =0.0;
-float tMax=0.0,tMin=0.0;
+float tempMax=0.0,tempMin=0.0;
 int heatTime=0;
 float thick=0.0;
 int heatTimeCount = 0; 
@@ -56,6 +56,36 @@ void heaters() {
 
 void vacuum() {
   //Osman part
-
-  
+lcd.print(0,0) "Pull up Symbol";
+digitalRead limitSwitch[];
+if (limitSwitch(,HIGH)){
+  digitalWrite(vacuum,High);
+ for(int i=0 ; i<18 ; i++){
+  last_counter=18 - i;
+  lcd.print(0,0) "Countdown : (last_counter) ";
+  delay(1000);
+  do{digitalWrite(fan,HIGH);}
+  while {last_counter==8;}
+  do{digitalWrite(vacuum,LOW);}
+  while {last_counter==5;}
+  do{digitalWrite(fan,LOW);}
+  while {last_counter==0;}
+ }
+ lcd.print(0,0) "Sheet (sheetCount) is ready..";
+ sheetCount=sheetCount++;
+ lcd.print(3,0) "Counter (counter)";
+ counter=counter++;
+ lcd.print(4,0) "Repeat ..?";
+ digitalRead(encoder[]);
+ if (encoder[],HIGH){
+  goto 
+  }
+  else{
+    digitalWrite(selector,LOW);
+    lcd.print (0,0) "Sleeping..";
+    }
+ }
+ 
+else { lcd.print(0,0) "Put the sheet.."
+}
 }
