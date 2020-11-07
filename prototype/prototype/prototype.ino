@@ -6,7 +6,7 @@ const int encoder[3] = {,,};
 const int lamp[3] = { , , };
 const int heatRelay;
 const int irPin[4]={,,,};
-const int thermoCouple[3]={,,};
+MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 const int buzzer;
 const int limitSwitch[3]={,,};
 const int fan;
@@ -49,9 +49,57 @@ void loop() {
 
 void heaters() {
   //Jahein part
-
-
+for(int i=0;i<4,i++){
+  irRead[i] = digitalRead(irPin[i]);
 }
+if(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1){
+  lcd.clear();
+  lcd.print("Pull the heater");
+}
+else{
+  lcd.clear();
+  lcd.print("Put the sheet");
+}
+int limitStart = digitalRead(limitSwitch[0];
+int limitEnd = digitalRead(limitSwitch[1];
+if(limitStart == 1){
+  digitalWrite(heatRelay , HIGH);
+}
+else{
+  lcd.clear();
+  lcd.print("Pull the Heater");
+}
+temp = thermocouple.readCelsius();
+if (t<tf){
+  digitalWrite(heatRelay , HIGH);
+  digitalWrite(lamp[1] , HIGH);
+  if(temp>tempMax){
+    digitalWrite(heatRelay , LOW);
+  }
+  if(temp<tempMin){
+    digitalWrite(heatRelay , HIGH);
+  }
+}
+else {
+  digitalWrite(heatRelay , LOW);
+  digitalWrite(lamp[1] , LOW);
+  lcd.clear();
+  lcd.print("Push heaters");
+  digitalWrite(buzzer,HIGH);
+}
+if(limitEnd==1){
+  digitalWrite(buzzer,HIGH);
+}
+else{
+  lcd.print("Push heaters");
+  digitalWrite(buzzer,HIGH);
+}
+
+
+
+
+
+
 
 
 void vacuum() {
