@@ -303,22 +303,28 @@ else{
 
 void vacuum() {
   //Osman part
-lcd.print(0,0) "Pull up Symbol";
-digitalRead limitSwitch[];
-if (limitSwitch(,HIGH)){
+lcd.clear();
+lcd.setCursor(9,2);  
+lcd.print "Pull up Symbol";
+digitalRead limitSwitch[2];
+if (limitSwitch(2,HIGH)){
   digitalWrite(vacuum,High);
  for(int i=0 ; i<18 ; i++){
   last_counter=18 - i;
   lcd.print(0,0) "Countdown : (last_counter) ";
   delay(1000);
-  do{digitalWrite(fan,HIGH);}
-  while {last_counter==8;}
-  do{digitalWrite(vacuum,LOW);}
-  while {last_counter==5;}
-  do{digitalWrite(fan,LOW);}
-  while {last_counter==0;}
+  if(last_counter==8){
+    digitalWrite(fan,LOW);
+    }
+ if (last_counter==5){
+  digitalWrite(vacuum,LOW);
+  }
+ if(last_counter==0){
+  digitalWrite(fan,HIGH);
  }
- lcd.print(0,0) "Sheet (sheetCount) is ready..";
+ lcd.clear();
+lcd.setCursor(9,2);  
+lcd.print "Sheet (sheetCount) is ready..";
  sheetCount=sheetCount++;
  lcd.print(3,0) "Counter (counter)";
  counter=counter++;
