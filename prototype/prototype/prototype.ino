@@ -5,7 +5,7 @@
 //Pins variables
 Encoder myEnc(, );
 const int encButton = ;
-const int lamp[3] = { , , };
+const int lamp[4] = { , , , };
 const int heatRelay;
 const int irPin[4]={,,,};
 MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
@@ -303,42 +303,68 @@ else{
 
 void vacuum() {
   //Osman part
-lcd.clear();
-lcd.setCursor(9,2);  
-lcd.print "Pull up Symbol";
-digitalRead limitSwitch[2];
+  lcd.clear();
+  lcd.setCursor(7,1);  
+  lcd.print("Please..");
+  lcd.setCursor(1,2);  
+  lcd.print ("Pull up Platen");
+  digitalWrite(lamp[2], HIGH);  
+  delay(1000);                      
+  digitalWrite(lamp[2], LOW);  
+  delay(1000);  
 if (limitSwitch(2,HIGH)){
   digitalWrite(vacuum,High);
- for(int i=0 ; i<18 ; i++){
-  last_counter=18 - i;
-  lcd.print(0,0) "Countdown : (last_counter) ";
+  digitalWrite(lamp[2], HIGH);  
+   }
+else {digitalRead limitSwitch[2];}
+  
+
+ for(int i=20 ; i>0 ; i--){
+  
+  lcd.clear();
+  lcd.setCursor(0,1);
+  lcd.print("Vacuum Process in progress");
+  delay(1000);
+  lcd.setCursor(3,2);
+  lcd.print("Countdown : (i) ");
   delay(1000);
   if(last_counter==8){
     digitalWrite(fan,LOW);
+    digitalWrite(lamp[3],LOW);
+
     }
  if (last_counter==5){
   digitalWrite(vacuum,LOW);
   }
  if(last_counter==0){
   digitalWrite(fan,HIGH);
+  digitalWrite(lamp[3],HIGH);
+
  }
  lcd.clear();
-lcd.setCursor(9,2);  
-lcd.print "Sheet (sheetCount) is ready..";
+ lcd.setCursor(1,1);  
+ lcd.print ("Sheet is ready..");
  sheetCount=sheetCount++;
- lcd.print(3,0) "Counter (counter)";
+ lcd.setCursor(3,2);
+ lcd.print("Take it now..");
  counter=counter++;
- lcd.print(4,0) "Repeat ..?";
+ lcd,setCursor(5,3);
+ lcd.print("Repeat ..?");
  digitalRead(encoder[]);
- if (encoder[],HIGH){
+ if (encoder[1],HIGH){
   goto 
   }
   else{
     digitalWrite(selector,LOW);
-    lcd.print (0,0) "Sleeping..";
+    lcd.clear();
+    lcd.setCursor(5,1);
+    lcd.print ("Sleeping..") ;
     }
  }
  
-else { lcd.print(0,0) "Put the sheet.."
+else { 
+  lcd.clear();
+  lcd.setCursor(3,1);
+  lcd.print("Put the sheet..");
 }
 }
