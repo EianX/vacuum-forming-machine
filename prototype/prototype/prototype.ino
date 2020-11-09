@@ -21,7 +21,7 @@ int thick = 0;
 float temp =0.0;
 float tempMax=0.0,tempMin=0.0;
 int heatTime=0;
-float thick=0.0;
+int thick=0;
 int heatTimeCount = 0; 
 int sheetCount = 0;
 int vacuumTime = 0;
@@ -178,6 +178,7 @@ void loop() {
         lcd.write(1);  
         lcd.print("Thickness: ");
         lcd.print(thick);
+        lcd.print(" mm");
         lcd.setCursor(0,2); 
         lcd.write(0); 
         lcd.print("Continue");
@@ -196,6 +197,7 @@ void loop() {
         lcd.write(1);  
         lcd.print("Thickness: ");
         lcd.print(thick);
+        lcd.print(" mm");
         lcd.setCursor(0,2);  
         lcd.print(" Continue");
         lcd.setCursor(0,3);
@@ -244,6 +246,64 @@ void loop() {
   }
 
   lastCounter = counter;
+
+  if(digitalRead(encButton)){
+    pushed = true;
+    myEnc.write(0);
+  
+    if(menu == 0)
+    {
+      menu = 1;
+    
+      if(opt == 1)
+      {
+        material = 0;
+        materialName = "PVC";
+      }
+      if(opt == 2)
+      {
+        material = 0;
+        materialName = "Acrylic";
+      }
+      if(opt == 3)
+      {
+        material = 1;
+        materialName = "PP";
+      }
+    }
+    if(menu == 1)
+    {
+      menu = 2;
+      thick = opt;
+    }
+    if(menu == 2)
+    {
+      if(opt == 1)
+      {
+        menu = 3;
+        heaters();
+        vacuum();
+      }
+      if(opt == 2)
+      {
+        menu = 0;
+      }
+    }
+    if(menu == 3)
+    {
+      if(opt == 1)
+      {
+        menu = 3;
+        heaters();
+        vacuum();
+      }
+      if(opt == 2)
+      {
+        menu = 0;
+      }
+    }
+  }
+  
 }
 
 void heaters() {
