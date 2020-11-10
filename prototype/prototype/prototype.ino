@@ -308,7 +308,7 @@ void loop() {
 
 void heaters() {
   //Jahein part
-for(int i=0;i<4,i++){
+for(int i=0;i<4;i++){
   irRead[i] = digitalRead(irPin[i]);
 }
 if(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1){
@@ -318,6 +318,7 @@ if(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1){
 else{
   lcd.clear();
   lcd.print("Put the sheet");
+  return 0;
 }
 int limitStart = digitalRead(limitSwitch[0]);
 int limitEnd = digitalRead(limitSwitch[1]);
@@ -327,9 +328,10 @@ if(limitStart == 1){
 else{
   lcd.clear();
   lcd.print("Pull the Heater");
+  return 0;
 }
-temp = thermocouple.readCelsius();
-if (t<tf){
+for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
+  temp = thermocouple.readCelsius();
   digitalWrite(heatRelay , HIGH);
   digitalWrite(lamp[1] , HIGH);
   if(temp>tempMax){
@@ -338,20 +340,22 @@ if (t<tf){
   if(temp<tempMin){
     digitalWrite(heatRelay , HIGH);
   }
+  delay(250);
 }
-else {
-  digitalWrite(heatRelay , LOW);
-  digitalWrite(lamp[1] , LOW);
-  lcd.clear();
-  lcd.print("Push heaters");
-  digitalWrite(buzzer,HIGH);
-}
+
+    digitalWrite(heatRelay , LOW);
+    digitalWrite(lamp[1] , LOW);
+    lcd.clear();
+    lcd.print("Push heaters");
+    digitalWrite(buzzer,HIGH);
+  }
 if(limitEnd==1){
   digitalWrite(buzzer,HIGH);
 }
 else{
   lcd.print("Push heaters");
   digitalWrite(buzzer,HIGH);
+  return 0;
 }
 }
 
