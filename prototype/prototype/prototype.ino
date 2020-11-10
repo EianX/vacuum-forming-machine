@@ -374,7 +374,7 @@ void vacuum() {
     int limitSwitchState = digitalRead(limitSwitch[2]);
     lamp[2].blink(500, 500);
     }
-while (limitSwitchState == LOW);  
+while (limitSwitchState == 0);  
     digitalWrite(vacuum,LOW);
     digitalWrite(lamp[2], HIGH); 
  for(int i=20 ; i>0 ; i--){
@@ -382,11 +382,9 @@ while (limitSwitchState == LOW);
   lcd.clear();
   lcd.setCursor(0,1);
   lcd.print("Vacuum Process in progress");
-  delay(1000);
   lcd.setCursor(4,2);
-  lcd.print("Countdown ");
-  lcd.println(i); 
-  delay(1000);
+  lcd.print("Countdown: ");
+  lcd.print(i);
   if(last_counter==8){
     digitalWrite(fan,HIGH);
     digitalWrite(lamp[3],LOW);
@@ -398,6 +396,7 @@ while (limitSwitchState == LOW);
   digitalWrite(fan,LOW);
   digitalWrite(lamp[3],HIGH);
  }
+ delay(1000);
  }
   do{ 
     lcd.clear();
@@ -406,11 +405,8 @@ while (limitSwitchState == LOW);
     sheetCount=sheetCount++;
     lcd.setCursor(3,2);
     lcd.print("Take it now..");
-    counter=counter++;
     lcd.setCursor(5,3);
     lcd.print("Repeat ..?");
   }
   while(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1);
-    lcd.clear();
-    lcd.setCursor(5,1);
-    lcd.print ("Sleeping..") ;
+}
