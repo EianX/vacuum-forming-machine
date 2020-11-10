@@ -311,25 +311,20 @@ void heaters() {
 for(int i=0;i<4;i++){
   irRead[i] = digitalRead(irPin[i]);
 }
-if(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1){
-  lcd.clear();
-  lcd.print("Pull the heater");
-}
-else{
+do {
   lcd.clear();
   lcd.print("Put the sheet");
-  return 0;
-}
+}while(irRead[0]==0 && irRead[1]==0 && irRead[2]==0 && irRead[3]==0);
+
 int limitStart = digitalRead(limitSwitch[0]);
-int limitEnd = digitalRead(limitSwitch[1]);
-if(limitStart == 1){
-  digitalWrite(heatRelay , HIGH);
-}
-else{
+
+do{
   lcd.clear();
   lcd.print("Pull the Heater");
-  return 0;
-}
+}while(limitStart == 0);
+  
+  digitalWrite(heatRelay , HIGH);
+  
 for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
   temp = thermocouple.readCelsius();
   digitalWrite(heatRelay , HIGH);
@@ -349,14 +344,16 @@ for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
     lcd.print("Push heaters");
     digitalWrite(buzzer,HIGH);
   }
-if(limitEnd==1){
-  digitalWrite(buzzer,HIGH);
-}
-else{
-  lcd.print("Push heaters");
-  digitalWrite(buzzer,HIGH);
-  return 0;
-}
+  
+  int limitEnd = digitalRead(limitSwitch[1]);
+
+  do{
+  lcd.clear();
+  lcd.print("Push the Heater");
+  digitalWrite(buzzer , HIGH);
+}while(limitEnd == 0);
+
+digitalWrite(buzzer , LOW);
 }
 
 
