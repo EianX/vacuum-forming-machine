@@ -308,27 +308,26 @@ void loop() {
 
 void heaters() {
   //Jahein part
-for(int i=0;i<4;i++){
-  irRead[i] = digitalRead(irPin[i]);
-}
-do {
   lcd.clear();
   lcd.print("Put the sheet");
+do {
+  for(int i=0;i<4;i++){
+  irRead[i] = digitalRead(irPin[i]);
+}
+  
 }while(irRead[0]==0 || irRead[1]==0 || irRead[2]==0 || irRead[3]==0);
 
 int limitStart = digitalRead(limitSwitch[0]);
-
-do{
   lcd.clear();
   lcd.print("Pull the Heater");
+do{
+  int limitStart = digitalRead(limitSwitch[0]);
 }while(limitStart == 0);
   
   digitalWrite(heatRelay , HIGH);
   
-for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
+for(heatTimeCount=0; heatTimecount <= heatTime * 4; heatTimeCount++){
   temp = thermocouple.readCelsius();
-  digitalWrite(heatRelay , HIGH);
-  digitalWrite(lamp[1] , HIGH);
   if(temp>tempMax){
     digitalWrite(heatRelay , LOW);
   }
@@ -339,17 +338,16 @@ for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
 }
 
     digitalWrite(heatRelay , LOW);
-    digitalWrite(lamp[1] , LOW);
     lcd.clear();
     lcd.print("Push heaters");
     digitalWrite(buzzer,HIGH);
   }
   
   int limitEnd = digitalRead(limitSwitch[1]);
-
-  do{
   lcd.clear();
   lcd.print("Push the Heater");
+  do{
+  int limitEnd = digitalRead(limitSwitch[1]);
   digitalWrite(buzzer , HIGH);
 }while(limitEnd == 0);
 
