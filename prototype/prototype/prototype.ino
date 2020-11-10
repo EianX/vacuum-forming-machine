@@ -337,7 +337,7 @@ for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
   if(temp>tempMax){
     digitalWrite(heatRelay , LOW);
   }
-  if(temp<tempMin){
+  else if(temp<tempMin){
     digitalWrite(heatRelay , HIGH);
   }
   delay(250);
