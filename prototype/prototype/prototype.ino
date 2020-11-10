@@ -364,10 +364,10 @@ else{
 void vacuum() {
   //Osman part
   lcd.clear();
-  lcd.setCursor(7,1);  
-  lcd.print("Please..");
-  lcd.setCursor(1,2);  
-  lcd.print ("Pull up Platen");
+  lcd.setCursor(1,1);  
+  lcd.print ("Pull up the Platen");
+  lcd.setCursor(6,2);  
+  lcd.print ("Please..");
   digitalWrite(lamp[2], HIGH);  
   delay(1000);                      
   digitalWrite(lamp[2], LOW);  
