@@ -372,12 +372,13 @@ void vacuum() {
   delay(1000);                      
   digitalWrite(lamp[2], LOW);  
   delay(1000);  
-if (limitSwitch(2,HIGH)){
-  digitalWrite(vacuum,High);
-  digitalWrite(lamp[2], HIGH);  
-   }
-else {digitalRead limitSwitch[2];}
-  
+  do {
+    digitalRead(limitSwitch[2]);
+    int limitSwitchState = limitSwitch[2];
+    digitalWrite(vacuum,High);
+    digitalWrite(lamp[2], HIGH); 
+    }
+while (limitSwitch(2,HIGH);)  
 
  for(int i=20 ; i>0 ; i--){
   
@@ -389,17 +390,15 @@ else {digitalRead limitSwitch[2];}
   lcd.print("Countdown : (i) ");
   delay(1000);
   if(last_counter==8){
-    digitalWrite(fan,LOW);
+    digitalWrite(fan,HIGH);
     digitalWrite(lamp[3],LOW);
-
     }
  if (last_counter==5){
   digitalWrite(vacuum,LOW);
   }
  if(last_counter==0){
-  digitalWrite(fan,HIGH);
+  digitalWrite(fan,LOW);
   digitalWrite(lamp[3],HIGH);
-
  }
  lcd.clear();
  lcd.setCursor(1,1);  
@@ -410,7 +409,7 @@ else {digitalRead limitSwitch[2];}
  counter=counter++;
  lcd,setCursor(5,3);
  lcd.print("Repeat ..?");
- digitalRead(encoder[]);
+ digitalRead(encoder[1]);
  if (encoder[1],HIGH){
   goto 
   }
