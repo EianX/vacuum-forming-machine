@@ -414,10 +414,3 @@ while (limitSwitchState == LOW);
     lcd.clear();
     lcd.setCursor(5,1);
     lcd.print ("Sleeping..") ;
-    
-else { 
-  lcd.clear();
-  lcd.setCursor(3,1);
-  lcd.print("Put the sheet..");
-}
-}
