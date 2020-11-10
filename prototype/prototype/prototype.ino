@@ -314,7 +314,7 @@ for(int i=0;i<4;i++){
 do {
   lcd.clear();
   lcd.print("Put the sheet");
-}while(irRead[0]==0 && irRead[1]==0 && irRead[2]==0 && irRead[3]==0);
+}while(irRead[0]==0 || irRead[1]==0 || irRead[2]==0 || irRead[3]==0);
 
 int limitStart = digitalRead(limitSwitch[0]);
 
