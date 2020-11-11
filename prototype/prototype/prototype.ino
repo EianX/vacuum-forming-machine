@@ -5,7 +5,7 @@
 //Pins variables
 Encoder myEnc(, );
 const int encButton = ;
-const int lamp[4] = { , , , };
+const int lamp[2] = { , };
 const int heatRelay;
 const int irPin[4]={,,,};
 MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
@@ -21,7 +21,6 @@ int thick = 0;
 float temp =0.0;
 float tempMax=0.0,tempMin=0.0;
 int heatTime=0;
-int thick=0;
 int heatTimeCount = 0; 
 int sheetCount = 0;
 int vacuumTime = 0;
@@ -317,7 +316,6 @@ do {
   
 }while(irRead[0]==0 || irRead[1]==0 || irRead[2]==0 || irRead[3]==0);
 
-int limitStart = digitalRead(limitSwitch[0]);
   lcd.clear();
   lcd.print("Pull the Heater");
 do{
@@ -327,21 +325,16 @@ do{
   digitalWrite(heatRelay , HIGH);
   lcd.clear();
   lcd.print("Heater is warming up");
+
+    tempMin = tempRange[material][0];
+    tempMax = tempRange[material][1];
+    heatTime = thickTime[material][thick];
+  
   do{
     temp = thermocouple.readCelsius();
   }while(temp<=tempMin);
-  if(matrial == 0){
-    tempMin = tempRange[0][0];
-    tempMax = tempRange[0][1];
-    heatTime = thickTime[0][thick];
-  }
-  else if(matrial == 1){
-    tempMin = tempRange[1][0];
-    tempMax = tempRange[1][1];
-    heatTime = thickTime[1][thick];
-  }
   
-for(heatTimeCount=0; heatTimecount <= heatTime * 4; heatTimeCount++){
+for(heatTimeCount=0; heatTimeCount <= heatTime * 4; heatTimeCount++){
   temp = thermocouple.readCelsius();
   if(temp>tempMax){
     digitalWrite(heatRelay , LOW);
@@ -355,20 +348,11 @@ for(heatTimeCount=0; heatTimecount <= heatTime * 4; heatTimeCount++){
     digitalWrite(heatRelay , LOW);
     lcd.clear();
     lcd.print("Push heaters");
-    digitalWrite(buzzer,HIGH);
-  }
   
-  int limitEnd = digitalRead(limitSwitch[1]);
-  lcd.clear();
-  lcd.print("Push the Heater");
   do{ 
   int limitEnd = digitalRead(limitSwitch[1]);
   for(int i=50;i<256;i++){
     analogWrite(buzzer,i);
-    delay(10);
-  }
-  for(int j=255;j>50;j--){
-    analogWrite(buzzer,j);
     delay(10);
   }
 }while(limitEnd == 0);
@@ -378,10 +362,7 @@ analogWrite(buzzer , 0);
 
 
 
-
-
-
-
+  
 void vacuum() {
   //Osman part
   lcd.clear();
@@ -389,31 +370,14 @@ void vacuum() {
   lcd.print ("Pull up the Platen");
   lcd.setCursor(6,2);  
   lcd.print ("Please..");
-  int ledBlinkState = 0;
-  pinMode(,OUTPUT);
-  unsigned long previousMillis = 0;        
-  const long interval = 1000;         
+         
   do {
     int limitSwitchState = digitalRead(limitSwitch[2]);
-    lamp[2].blink(500, 500);
-
-unsigned long currentMillis = millis();
-    if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;
-
-    
-    if (ledBlinkState == 0) {
-      ledBlinkState = 1;
-    } else {
-      ledBlinkState = 0;
+    digitalWrite(lamp[1],millis()/1000 %2);
     }
-
-    digitalWrite(lamp[2], ledBlinkState);
-  }
-    }
-while (limitSwitchState == 0);  
+    while (limitSwitchState == 0);  
     digitalWrite(vacuum,LOW);
-    digitalWrite(lamp[2], HIGH); 
+    digitalWrite(lamp[1], HIGH); 
  for(int i=20 ; i>0 ; i--){
   
   lcd.clear();
@@ -423,29 +387,29 @@ while (limitSwitchState == 0);
   lcd.print("Countdown ");
   lcd.print(i); 
   if(i==8){
-  lcd.print("Countdown: ");
-  lcd.print(i);
-  if(last_counter==8){
     digitalWrite(fan,HIGH);
-    digitalWrite(lamp[3],LOW);
+    digitalWrite(lamp[1],LOW);
     }
  if (i==5){
   digitalWrite(vacuum,HIGH);
   }
  if(i==0){
   digitalWrite(fan,LOW);
-  digitalWrite(lamp[3],HIGH);
+  digitalWrite(lamp[1],HIGH);
  }
+ delay(1000);
  }
     lcd.clear();
     lcd.setCursor(1,1);  
     lcd.print ("Sheet is ready..");
-    sheetCount=sheetCount++;
+    sheetCount++;
     lcd.setCursor(3,2);
     lcd.print("Take it now..");
     
-  do{ 
-      irRead[i] = digitalRead(irPin[i]);
+  do{
+    for(int i=0;i<4;i++){
+  irRead[i] = digitalRead(irPin[i]);
+  }
   }
   while(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1);
 }
