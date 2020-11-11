@@ -308,27 +308,26 @@ void loop() {
 
 void heaters() {
   //Jahein part
-for(int i=0;i<4;i++){
-  irRead[i] = digitalRead(irPin[i]);
-}
-do {
   lcd.clear();
   lcd.print("Put the sheet");
+do {
+  for(int i=0;i<4;i++){
+  irRead[i] = digitalRead(irPin[i]);
+}
+  
 }while(irRead[0]==0 || irRead[1]==0 || irRead[2]==0 || irRead[3]==0);
 
 int limitStart = digitalRead(limitSwitch[0]);
-
-do{
   lcd.clear();
   lcd.print("Pull the Heater");
+do{
+  int limitStart = digitalRead(limitSwitch[0]);
 }while(limitStart == 0);
   
   digitalWrite(heatRelay , HIGH);
   
-for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
+for(heatTimeCount=0; heatTimecount <= heatTime * 4; heatTimeCount++){
   temp = thermocouple.readCelsius();
-  digitalWrite(heatRelay , HIGH);
-  digitalWrite(lamp[1] , HIGH);
   if(temp>tempMax){
     digitalWrite(heatRelay , LOW);
   }
@@ -339,17 +338,16 @@ for(heatTimeCount; heatTimecount <= heatTime * 4; heatTimeCount++){
 }
 
     digitalWrite(heatRelay , LOW);
-    digitalWrite(lamp[1] , LOW);
     lcd.clear();
     lcd.print("Push heaters");
     digitalWrite(buzzer,HIGH);
   }
   
   int limitEnd = digitalRead(limitSwitch[1]);
-
-  do{
   lcd.clear();
   lcd.print("Push the Heater");
+  do{
+  int limitEnd = digitalRead(limitSwitch[1]);
   digitalWrite(buzzer , HIGH);
 }while(limitEnd == 0);
 
@@ -383,9 +381,15 @@ while (limitSwitchState == 0);
   lcd.setCursor(0,1);
   lcd.print("Vacuum Process in progress");
   lcd.setCursor(4,2);
+<<<<<<< HEAD
   lcd.print("Countdown ");
   lcd.print(i); 
   if(i==8){
+=======
+  lcd.print("Countdown: ");
+  lcd.print(i);
+  if(last_counter==8){
+>>>>>>> aec876678c08c703955cc2b708da279226d05a4a
     digitalWrite(fan,HIGH);
     digitalWrite(lamp[3],LOW);
     }
@@ -396,6 +400,7 @@ while (limitSwitchState == 0);
   digitalWrite(fan,LOW);
   digitalWrite(lamp[3],HIGH);
  }
+ delay(1000);
  }
     lcd.clear();
     lcd.setCursor(1,1);  
@@ -403,11 +408,14 @@ while (limitSwitchState == 0);
     sheetCount=sheetCount++;
     lcd.setCursor(3,2);
     lcd.print("Take it now..");
+<<<<<<< HEAD
     
   do{ 
       irRead[i] = digitalRead(irPin[i]);
+=======
+    lcd.setCursor(5,3);
+    lcd.print("Repeat ..?");
+>>>>>>> aec876678c08c703955cc2b708da279226d05a4a
   }
   while(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1);
-    lcd.clear();
-    lcd.setCursor(5,1);
-    lcd.print ("Sleeping..") ;
+}
