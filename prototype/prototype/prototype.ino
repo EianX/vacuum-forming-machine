@@ -389,10 +389,27 @@ void vacuum() {
   lcd.print ("Pull up the Platen");
   lcd.setCursor(6,2);  
   lcd.print ("Please..");
-   
+  int ledBlinkState = 0;
+  pinMode(,OUTPUT);
+  unsigned long previousMillis = 0;        
+  const long interval = 1000;         
   do {
     int limitSwitchState = digitalRead(limitSwitch[2]);
     lamp[2].blink(500, 500);
+
+unsigned long currentMillis = millis();
+    if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+
+    
+    if (ledBlinkState == 0) {
+      ledBlinkState = 1;
+    } else {
+      ledBlinkState = 0;
+    }
+
+    digitalWrite(lamp[2], ledBlinkState);
+  }
     }
 while (limitSwitchState == 0);  
     digitalWrite(vacuum,LOW);
