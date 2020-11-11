@@ -381,15 +381,12 @@ while (limitSwitchState == 0);
   lcd.setCursor(0,1);
   lcd.print("Vacuum Process in progress");
   lcd.setCursor(4,2);
-<<<<<<< HEAD
   lcd.print("Countdown ");
   lcd.print(i); 
   if(i==8){
-=======
   lcd.print("Countdown: ");
   lcd.print(i);
   if(last_counter==8){
->>>>>>> aec876678c08c703955cc2b708da279226d05a4a
     digitalWrite(fan,HIGH);
     digitalWrite(lamp[3],LOW);
     }
@@ -400,7 +397,6 @@ while (limitSwitchState == 0);
   digitalWrite(fan,LOW);
   digitalWrite(lamp[3],HIGH);
  }
- delay(1000);
  }
     lcd.clear();
     lcd.setCursor(1,1);  
@@ -408,14 +404,9 @@ while (limitSwitchState == 0);
     sheetCount=sheetCount++;
     lcd.setCursor(3,2);
     lcd.print("Take it now..");
-<<<<<<< HEAD
     
   do{ 
       irRead[i] = digitalRead(irPin[i]);
-=======
-    lcd.setCursor(5,3);
-    lcd.print("Repeat ..?");
->>>>>>> aec876678c08c703955cc2b708da279226d05a4a
   }
   while(irRead[0]==1 && irRead[1]==1 && irRead[2]==1 && irRead[3]==1);
 }
