@@ -325,6 +325,21 @@ do{
 }while(limitStart == 0);
   
   digitalWrite(heatRelay , HIGH);
+  lcd.clear();
+  lcd.print("Heater is warming up");
+  do{
+    temp = thermocouple.readCelsius();
+  }while(temp<=tempMin);
+  if(matrial == 0){
+    tempMin = tempRange[0][0];
+    tempMax = tempRange[0][1];
+    heatTime = thickTime[0][thick];
+  }
+  else if(matrial == 1){
+    tempMin = tempRange[1][0];
+    tempMax = tempRange[1][1];
+    heatTime = thickTime[1][thick];
+  }
   
 for(heatTimeCount=0; heatTimecount <= heatTime * 4; heatTimeCount++){
   temp = thermocouple.readCelsius();
@@ -346,12 +361,19 @@ for(heatTimeCount=0; heatTimecount <= heatTime * 4; heatTimeCount++){
   int limitEnd = digitalRead(limitSwitch[1]);
   lcd.clear();
   lcd.print("Push the Heater");
-  do{
+  do{ 
   int limitEnd = digitalRead(limitSwitch[1]);
-  digitalWrite(buzzer , HIGH);
+  for(int i=50;i<256;i++){
+    analogWrite(buzzer,i);
+    delay(10);
+  }
+  for(int j=255;j>50;j--){
+    analogWrite(buzzer,j);
+    delay(10);
+  }
 }while(limitEnd == 0);
 
-digitalWrite(buzzer , LOW);
+analogWrite(buzzer , 0);
 }
 
 
