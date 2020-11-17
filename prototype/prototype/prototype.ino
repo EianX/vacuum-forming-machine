@@ -1,12 +1,12 @@
 /*
  *- Project neame: Vacuum forming machine prototype.
  *- Programmers: Abdelrahman Nasr Maaroof, Mahmoud Ali Abdalmonem, Mahmoud Ibrahim Osman.
- *- Revision history: V 
+ *- Revision history: V3.6 
  *- Description: Manual vacuum forming machine used to shape plastic materials. During the vacuum forming process, a sheet of plastic is heated and then pulled around a single mould using suction.
  *- Development details:
       MCU: Arduino mega, SW: Arduino IDE.
- *- Notes: A program to take the user input fot the sheet material type and its thickness then start the vacuum forming process with heating the sheet first then vacuum air to shape it after the placed Mould
-           with all the information and instructions displayed on LCD and 4 lamps for indications.
+ *- Notes: A program to take the user input fot the sheet material type and its thickness then start the vacuum forming process with heating the sheet first then vacuum air to shape it after the 
+           placed Mould with all the information and instructions displayed on LCD and 4 lamps for indications.
  */
 
 //Including required libraries:
