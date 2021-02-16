@@ -4,7 +4,7 @@
  *- Revision history: V4.6 
  *- Description: Manual vacuum forming machine used to shape plastic materials. During the vacuum forming process, a sheet of plastic is heated and then pulled around a single mould using suction.
  *- Development details:
-      MCU: Arduino mega, SW: Arduino IDE.
+      MCU: Arduino Mega, SW: Arduino IDE.
  *- Notes: A program to take the user input fot the sheet material type and its thickness then start the vacuum forming process with heating the sheet first then vacuum air to shape it after the 
            placed Mould with all the information and instructions displayed on LCD and 4 lamps for indications.
  */
@@ -365,7 +365,7 @@ void heaters() {
     lcd.setCursor(13,3);
     lcd.print(temp);
     delay(500);
-    lcd.print("  ");
+    lcd.print(" ");
   }while(temp < tempMin);
   //Display pull the heaters instruction
   lcd.clear();
@@ -440,9 +440,9 @@ void Vacuum() {
   //Display pull up the platen instruction
   lcd.clear();
   lcd.setCursor(1,1);  
-  lcd.print ("Pull up the Platen");
+  lcd.print("Pull up the Platen");
   lcd.setCursor(6,2);  
-  lcd.print ("Please..");
+  lcd.print("Please..");
   //Read the end limit switch for the platen till it reaches       
   while(!digitalRead(limitSwitch[2]));  
   //Trun on the vacuum and its lamp after completing
