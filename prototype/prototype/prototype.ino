@@ -157,9 +157,9 @@ void loop() {
         lcd.print("Select thickness:");
         lcd.setCursor(0,1);
         lcd.write(2);  
-        lcd.print("300 um");
+        lcd.print("300 \xe4m");
         lcd.setCursor(0,2);  
-        lcd.print(" 650 um");
+        lcd.print(" 650 \xe4m");
         lcd.setCursor(0,3);  
         lcd.print(" 1 mm");
         opt = 1;
@@ -169,10 +169,10 @@ void loop() {
         lcd.setCursor(0,0);
         lcd.print("Select thickness:");
         lcd.setCursor(0,1);  
-        lcd.print(" 300 um");
+        lcd.print(" 300 \xe4m");
         lcd.setCursor(0,2); 
         lcd.write(2); 
-        lcd.print("650 um");
+        lcd.print("650 \xe4m");
         lcd.setCursor(0,3);  
         lcd.print(" 1 mm");
         opt = 2;
@@ -182,9 +182,9 @@ void loop() {
         lcd.setCursor(0,0);
         lcd.print("Select thickness:");
         lcd.setCursor(0,1);  
-        lcd.print(" 300 um");
+        lcd.print(" 300 \xe4m");
         lcd.setCursor(0,2);  
-        lcd.print(" 650 um");
+        lcd.print(" 650 \xe4m");
         lcd.setCursor(0,3); 
         lcd.write(2); 
         lcd.print("1 mm");
@@ -302,11 +302,11 @@ void loop() {
       thick = opt;
       if(opt == 1)
       {
-        thickName = "300 um";
+        thickName = "300 \xe4m";
       }
       if(opt == 2)
       {
-        thickName = "650 um";
+        thickName = "650 \xe4m";
       }
       if(opt == 3)
       {
