@@ -76,7 +76,7 @@ void setup() {
   lcd.begin(20, 4);
   lcd.createChar(1, checked); //Create the checked symbol
   lcd.createChar(2, arrow);   //Create the arrow symbol
-  lcd.createChar(3, slash); //Create the checked symbol
+  lcd.createChar(3, slash); //Create the backslash symbol
   lcd.home();                 //Home the LCD
 
   //Display the welcome message
@@ -148,7 +148,7 @@ void loop() {
         opt = 3;
       }
     }
-    //2nd menu (choose thickness: 1mm, 2mm or 3mm):
+    //2nd menu (choose thickness: 300µm, 650µm or 1mm):
     if(menu == 1)
     {  
       if(0 <= counter && counter < 6)
